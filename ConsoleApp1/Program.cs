@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ConsoleApplication1
+namespace Program
 {
-    class Program
+    class HelloWorld
     {
         static void Main(string[] args)
         {
@@ -10,10 +10,10 @@ namespace ConsoleApplication1
 
             while (i > 0)
             {
-                Console.WriteLine("Hello World");
+                Console.WriteLine("Hello World, {0}", i);
+                i++;
             }
 
         }
     }
 }
-
