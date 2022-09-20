@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="528814"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2022-09-20 04:25:47 PM"/>
+        <attribute name="created" value="NTI4ODE0O0wtQ0IzNDYtMjEyNzQ7MjAyMi0wOS0yMDswNDowMToyOCBQTTsyMzA0"/>
+        <attribute name="edited" value="NTI4ODE0O0wtQ0IzNDYtMjEyNzQ7MjAyMi0wOS0yMDswNDoyNTo0NyBQTTsyOzI0MjA="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="sword" type="Boolean" array="False" size=""/>
+            <declare name="missint" type="Integer" array="False" size=""/>
+            <declare name="Attackmiss" type="Boolean" array="False" size=""/>
+            <declare name="enemyhp" type="Integer" array="False" size=""/>
+            <declare name="playerdamage" type="Integer" array="False" size=""/>
+            <assign variable="ehp" expression="Random(26)"/>
+            <assign variable="pd" expression="Random(11)"/>
+            <assign variable="sword" expression="false"/>
+            <if expression="sword = true">
+                <then>
+                    <assign variable="pd" expression="pd + 5"/>
+                </then>
+                <else/>
+            </if>
+            <assign variable="missint" expression="Random(11)"/>
+            <if expression="missint = 1">
+                <then>
+                    <assign variable="Attackmiss" expression="true"/>
+                </then>
+                <else>
+                    <assign variable="Attackmiss" expression="false"/>
+                </else>
+            </if>
+            <if expression="Attackmiss">
+                <then>
+                    <assign variable="pd" expression="0"/>
+                </then>
+                <else>
+                    <assign variable="ehp" expression="ehp - pd"/>
+                </else>
+            </if>
+            <output expression="pd" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
