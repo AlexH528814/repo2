@@ -16,4 +16,8 @@
 'ConsoleApp3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.9\System.Runtime.Loader.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
 'ConsoleApp3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.9\System.Text.Encoding.Extensions.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
 'ConsoleApp3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.9\System.Collections.Concurrent.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-The program '[12316] ConsoleApp3.exe' has exited with code 0 (0x0).
+The thread 0x48fc has exited with code 0 (0x0).
+The thread 0x4720 has exited with code 0 (0x0).
+The thread 0x2e20 has exited with code 0 (0x0).
+The thread 0x5530 has exited with code 0 (0x0).
+The program '[20056] ConsoleApp3.exe' has exited with code 3221225786 (0xc000013a).
