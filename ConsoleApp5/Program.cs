@@ -1,10 +1,14 @@
-﻿using System.Runtime.CompilerServices;
-
-string SpawnMessage1;
+﻿Random rnd = new Random();
+string spawnMessage1;
+string spawnMessage2;
+string spawnMessage3;
+string deathMessage1;
+string deathMessage2;
+string deathMessage3;
 string Choice;
-int EnemyChance;
+int enemyChance;
 int Number;
-int enemyHP;
+int enemyHP = 0;
 int playerHP = 100;
 int enemydamage;
 int playerblockchance;
@@ -13,19 +17,100 @@ int enemyCritchance;
 int Heals = 3;
 int healthgain;
 int playerDamage;
-int MonsterChance;
-Boolean debouce = false;
+int e;
 Boolean blocking = false;
 
+string answer = "n";
 
 
-SpawnMessage1 = "High Priest Pucci appeared before you";
+spawnMessage1 = "High Priest Pucci appeared before you";
+spawnMessage2 = "The epic prison guard appeared before you";
+spawnMessage3 = "The enemy prisoner appeared before you";
+deathMessage1 = "High Priest Pucci has finally been eliminated";
+deathMessage2 = "You deafeated the prison guard";
+deathMessage3 = "You vanquished the enemy prisoner";
+
+e = rnd.Next(1, 4);
 Boolean enemy1Spawned = false;
 Boolean enemy2Spawned = false;
 Boolean enemy3Spawned = false;
-Random rnd = new Random();
 
-void RndDam()
+switch (e)
+{
+    case 1:
+        enemy1Spawned = true;
+        enemyHP = rnd.Next(150, 300);
+        break;
+    case 2:
+        enemy2Spawned = true;
+        enemyHP = rnd.Next(75, 125);
+        break;
+    case 3:
+        enemy3Spawned = true;
+        enemyHP = rnd.Next(50, 100);
+        break;
+
+}
+    
+void pucciMsg()
+{
+    Console.WriteLine($"High Priest Pucci has {enemyHP} Health");
+    Thread.Sleep(2000);
+
+    Console.WriteLine("What would you like to do? [Attack] [Block] [Heal]");
+    Thread.Sleep(2000);
+
+    
+
+}
+
+void pucciAttack()
+{
+    Thread.Sleep(1000);
+    Console.WriteLine($"High Priest Pucci has  {enemyHP} Health");
+
+
+    Console.WriteLine("High Priest Pucci has contolled his emotions and packed them into a single devastating punch!");
+    Thread.Sleep(2000);
+
+    if (enemyCritchance == 1)
+    {
+        enemydamage = enemydamage * 2;
+        playerHP = playerHP - enemydamage;
+        Console.WriteLine($"You now have {playerHP} Health Left ");
+        Thread.Sleep(2000);
+    }
+
+    else if (enemyCritchance != 1)
+    {
+        Console.WriteLine($"High Priest Pucci dealt you {enemydamage} damage ");
+        playerHP = playerHP - enemydamage;
+        Console.WriteLine($"You now have {playerHP} Health Left ");
+        Thread.Sleep(2000);
+    }
+}
+
+void playerCrit()
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Thread.Sleep(1000);
+    Console.WriteLine("You get ready to release your anger upon your enemy!");
+    Thread.Sleep(1000);
+    Thread.Sleep(1000);
+
+    playerDamage = playerDamage * 2;
+    Console.WriteLine($"You managed to land your attack in your enemy's weak spot, it did {playerDamage} Damage!");
+
+    enemyHP = enemyHP - playerDamage;
+    Console.ForegroundColor = ConsoleColor.White;
+}
+
+void blockedPucci()
+{
+
+}
+
+void rndDam()
 {
     playerCritchance = rnd.Next(0, 10);
     enemyCritchance = rnd.Next(0, 10);
@@ -34,12 +119,13 @@ void RndDam()
     playerDamage = rnd.Next(12, 50);
     enemydamage = rnd.Next(9, 35);
 }
-enemyHP = rnd.Next(100, 500);
-MonsterChance = rnd.Next(1, 1);
-if (MonsterChance == 1)
+
+enemyChance = rnd.Next(1, 1);
+Console.WriteLine(e);
+if (enemyChance == 1 && e == 1)
 {
     enemy1Spawned = true;
-    Console.WriteLine(SpawnMessage1);
+    Console.WriteLine(spawnMessage1);
     Thread.Sleep(1000);
     Console.WriteLine(@"                                                                                                                                                                                  
                                                 ▄█████▄                                   
@@ -113,251 +199,66 @@ if (MonsterChance == 1)
                                    ╙┴═+~∞░░░░═`   ╙╜╜╙╜└                                  
 ");
 }
-else if (MonsterChance != 1)
-{
+
+else if (enemyChance != 1)
+{ 
     enemy1Spawned = false;
+    enemy2Spawned = false;
+    enemy3Spawned = false;
 }
+
 if (enemy1Spawned == true)
 {
-    while (enemy1Spawned == true && debouce == false)
+    while (enemy1Spawned == true)
     {
-        debouce = true;
-        Console.WriteLine($"High Priest Pucci has  {enemyHP} Health");
-        Thread.Sleep(1000);
+        pucciMsg();
+        answer = Console.ReadLine();
 
-        Console.WriteLine("What would you like to do? [Attack] [Block] [Heal]");
-        Thread.Sleep(1000);
-
-        string answer = Console.ReadLine();
-
-        if (answer == "Attack" ^ answer == "attack" ^ answer == "1")
+        if (answer == "Attack" ^ answer == "attack" ^ answer == "1" ^ answer == "a")
         {
-            RndDam();
+            rndDam();
 
-            Thread.Sleep(1000);
             if (playerCritchance == 1)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Thread.Sleep(1000);
-                Console.WriteLine("You charge up  strong attack!");
-                Thread.Sleep(1000);
-                
-               
-
-                playerDamage = playerDamage * 2;
-                Console.WriteLine($"Your Attack did {playerDamage} Damage, Critical!");
-                Console.ForegroundColor = ConsoleColor.White; 
-                Thread.Sleep(1000);
-                enemyHP = enemyHP - playerDamage;
+                playerCrit();
             }
+
             else if (playerCritchance != 1)
             {
-
-                Console.WriteLine($"Your Attack did {playerDamage} Damage");
+                Console.WriteLine($"You attacked Pucci for {playerDamage} damage");
                 enemyHP = enemyHP - playerDamage;
-
             }
 
             if (enemyHP <= 0)
             {
-                Thread.Sleep(1000);
-
                 enemy1Spawned = false;
-                Console.WriteLine("You eliminated Father Pucci");
-                Thread.Sleep(1000);
-
+                Console.WriteLine(deathMessage1);
             }
+
             else if (enemyHP > 0 && playerHP > 0)
             {
-                Thread.Sleep(1000);
-                Console.WriteLine($"High Priest Pucci has  {enemyHP} Health");
-
-
-                Console.WriteLine("High Priest Pucci is getting ready to deal a hurtful blow!");
-                Thread.Sleep(1000);
-
-                if (enemyCritchance == 1)
-                {
-                    enemydamage = enemydamage * 2;
-                    playerHP = playerHP - enemydamage;
-                    Console.WriteLine($"You have {playerHP} Health Left ");
-                    Thread.Sleep(2000);
-                }
-
-                else if (enemyCritchance != 1)
-                {
-                    Console.WriteLine($"High Priest Pucci dealt you {enemydamage} damage ");
-                    playerHP = playerHP - enemydamage;
-                    Console.WriteLine($"You have {playerHP} Health Left ");
-                    Thread.Sleep(1000);
-                }
-
-
-                if (playerHP <= 0)
-                {
-                    Console.WriteLine("High Priest Pucci vanquished you!");
-                    Thread.Sleep(1000);
-
-                }
-                else if (playerHP > 0)
-                {
-                    debouce = false;
-
-                }
-
-
+                pucciAttack();
             }
-        }
-        else if (answer == "Block" ^ answer == "block")
+
+            if (playerHP <= 0)
+            {
+                Console.WriteLine("High Priest Pucci defeated you and stole your kingdom from you");
+            }
+        }  
+        
+        else if (answer == "Block" ^ answer == "block" ^ answer == "2" ^ answer == "b")
         {
-            RndDam();
-            Thread.Sleep(1000);
 
-
-            if (enemyHP <= 0)
-            {
-                Thread.Sleep(1000);
-
-                enemy1Spawned = false;
-                Console.WriteLine("The Monster has died");
-                Thread.Sleep(1000);
-
-            }
-            else if (enemyHP > 0 && playerHP > 0)
-            {
-                Thread.Sleep(1000);
-                Console.WriteLine($"High Priest Pucci has {enemyHP} Health");
-
-                if (playerblockchance != 1 && enemyCritchance != 1)
-                {
-                    Console.WriteLine("High Priest Pucci attempts to calm his nerves while sending a strike your way!");
-                    Thread.Sleep(1000);
-
-                    Console.WriteLine($"High Priest Pucci dealt you {enemydamage} damage, However you blocked it! ");
-                    playerHP = playerHP;
-                    Console.WriteLine($"You have {playerHP} Health Left. You remain intact!");
-                    Thread.Sleep(1000);
-                }
-                else if (playerblockchance != 1 && enemyCritchance == 1)
-                {
-                    Console.WriteLine("High Priest Pucci counts the first first 10 digits of Pi, 3.1415926535 in order to stabalise his emotions for a violent punch");
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Thread.Sleep(1000);
-                    Console.WriteLine("High Priest Pucci is glowing with the energy of his releasing emotions");
-                    Thread.Sleep(1000);
-
-                    Console.ForegroundColor = ConsoleColor.White;
-
-                    Thread.Sleep(1000);
-
-                    Console.WriteLine($"High Priest Pucci dealt {enemydamage} damage, You atempted to block his attack but your guard was broken!");
-                    playerHP = playerHP - enemydamage * 4 / 3;
-                    
-
-                }
-
-
-                if (playerHP <= 0)
-                {
-                    Console.WriteLine("High Priest Pucci eliminated you!");
-                    Thread.Sleep(1000);
-                    playerHP = 0;
-                }
-                else if (playerHP > 0)
-                {
-                    debouce = false;
-
-                }
-
-                    Console.WriteLine($"you have {playerHP} Health Left.");
-            }
         }
-        else if (answer == "Heal" ^ answer == "heal")
-        {
-            RndDam();
-
-            if (Heals > 0)
-            {
-                healthgain = rnd.Next(10, 15);
-                Console.ForegroundColor = ConsoleColor.Green;
-
-                Console.WriteLine("You swiftly grab the red potion from you side and down it..");
-                Heals = Heals - 1;
-                Thread.Sleep(1500);
-                Console.WriteLine($"You have {Heals} Potions left!");
-
-                Console.WriteLine($"You Gain {healthgain} Health!");
-                Thread.Sleep(1500);
-                Console.ForegroundColor = ConsoleColor.White;
-
-                playerHP = playerHP + healthgain;
-                Console.WriteLine($"You have {playerHP} Health");
-            }
-            else if (Heals <= 0)
-            {
-                Console.WriteLine("You put your hand to your side to grab a potion but..");
-
-                Console.ForegroundColor = ConsoleColor.Red;
-                Thread.Sleep(1000);
-                Console.WriteLine("Theres nothing there");
-
-                Thread.Sleep(1000);
-
-                Console.ForegroundColor = ConsoleColor.White;
-
-
-
-            }
-
-            if (enemyHP > 0 && playerHP > 0)
-            {
-                Thread.Sleep(1000);
-                Console.WriteLine($"High Priest Pucci has  {playerHP} Health remaining");
-
-                if (playerblockchance != 1 && enemyCritchance != 1)
-                {
-                    Console.WriteLine("High Priest Pucci is readying himself to strike you and it's fist extends and a fast speed!");
-                    Thread.Sleep(1000);
-
-                    Console.WriteLine($"High Priest Pucci dealt you {enemydamage} damage, However you managed to block it! ");
-                 
-                    Console.WriteLine($"You have {playerHP} Health Left. You remain intact!");
-                    Thread.Sleep(1000);
-                }
-                else if (playerblockchance != 1 && enemyCritchance == 1)
-                {
-                    Console.WriteLine("High Priest Pucci gets ready to punch you");
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Thread.Sleep(1000);
-                    Console.WriteLine("High Priest Pucci has turned Red from the anger he is feeling towards you!");
-                    Thread.Sleep(1000);
-
-                    Console.ForegroundColor = ConsoleColor.White;
-
-                    Thread.Sleep(1000);
-
-                    Console.WriteLine($"High Priest Pucci has dealt {enemydamage} damage, you atempted to block his attack but your guard was broken!");
-                    playerHP = playerHP - enemydamage * 4 / 3;
-                    Console.WriteLine($"You have {playerHP} Health remaining.");
-
-                }
-
-
-                if (playerHP <= 0)
-                {
-                    Console.WriteLine("High Priest Pucci has vanquished you!");
-                    Thread.Sleep(1000);
-                    playerHP = 0;
-                }
-                else if (playerHP > 0)
-                {
-                    debouce = false;
-
-                }
-                    
-
-            }
-        }
-
     }
+}
+
+else if (enemyChance == 1 && e == 2)
+{
+    Console.WriteLine("Unfinished");
+}
+
+else if (enemyChance == 1 && e == 3)
+{
+    Console.WriteLine("Unfinished");
 }
