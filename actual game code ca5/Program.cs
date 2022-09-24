@@ -5,7 +5,6 @@ string spawnMessage3;
 string deathMessage1;
 string deathMessage2;
 string deathMessage3;
-string Choice;
 int enemyChance;
 int Number;
 int enemyHP = 0;
@@ -21,6 +20,7 @@ int e;
 Boolean blocking = false;
 
 string answer = "n";
+string choice = "";
 
 
 spawnMessage1 = "High Priest Pucci appeared before you";
@@ -108,6 +108,22 @@ void playerCrit()
 void blockedPucci()
 {
 
+}
+
+void pucciKill()
+{
+    if (playerHP <= 0)
+    {
+        Console.WriteLine("High Priest Pucci has stolen your throne and defeated you");
+    }
+}
+void pucciDeath()
+{
+    if (enemyHP <= 0)
+    {
+        enemy1Spawned = false;
+        Console.WriteLine(deathMessage1);
+    }
 }
 
 void rndDam()
@@ -240,15 +256,12 @@ if (enemy1Spawned == true)
                 pucciAttack();
             }
 
-            if (playerHP <= 0)
-            {
-                Console.WriteLine("High Priest Pucci defeated you and stole your kingdom from you");
-            }
+            pucciKill();
         }  
         
         else if (answer == "Block" ^ answer == "block" ^ answer == "2" ^ answer == "b")
         {
-
+            pucciKill();
         }
     }
 }
