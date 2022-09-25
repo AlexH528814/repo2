@@ -15,12 +15,14 @@ int playerCritchance;
 int enemyCritchance;
 int Heals = 3;
 int healthgain;
-int playerDamage;
+int playerStabDamage;
+int playerThrustDamage;
 int e;
 Boolean blocking = false;
 
 string answer = "n";
-string choice = "";
+string movechoice = "";
+string fightflight = "";
 
 
 spawnMessage1 = "High Priest Pucci appeared before you";
@@ -30,10 +32,74 @@ deathMessage1 = "High Priest Pucci has finally been eliminated";
 deathMessage2 = "You deafeated the prison guard";
 deathMessage3 = "You vanquished the enemy prisoner";
 
-e = rnd.Next(1, 4);
 Boolean enemy1Spawned = false;
 Boolean enemy2Spawned = false;
 Boolean enemy3Spawned = false;
+
+switch (fightflight)
+{
+    case "Fight":
+        Console.WriteLine("You decided to fight the prisoner");
+        enemyChance = 1;
+        e = 1;
+        break;
+
+    case "Flee":
+        enemyChance = 0;
+        Console.WriteLine("You chose to flee from the prisoner");
+        break;
+
+}
+
+switch (movechoice)
+{
+    case "Left":
+        Console.WriteLine(@"     \                  ###########                  /
+      \                  #########                  /
+       \                                           /
+        \                                         /
+         \                                       /
+          \                                     /
+           \                                   /
+            \_________________________________/
+            |                                 |
+            |                                 |
+            |                                 |
+            |            _________            |
+            |           |         |           |
+            |           |   ___   |           |
+            |           I  |___|  |           |
+            |           |         |           |
+            |           |         |           |
+            |           |        _|           |
+            |           |       |#|           |  ;,
+    -- ___  |           |         |           |   ;'
+    H*/   ` |           |         |      _____|    .,`
+    */     )|           I         |     \_____\     ;'
+    /___.,';|           |         |     \\     \     .""`
+    |     ; |___________|_________|______\\     \      ;:
+    | ._,'  /                             \\     \      .
+    |,'    /                               \\     \
+    ||    /                                 \\_____\
+    ||   /                                   \_____|
+    ||  /              ___________                \
+    || /              / =====o    |                \
+    ||/              /  |   /-\   |                 \
+    //              /   |         |                  \
+   //              /    |   ____  |______             \
+  //              /    (O) |    | |      \             \
+ //              /         |____| |  0    \             \
+//              /          o----  |________\             \
+/              /                  |     |  |              \
+              /                   |        |               \
+             /                    |        |             leb
+            /                     |        |
+
+");
+        Console.WriteLine("A prisoner appears in your cell before you, what would you like to do? [Fight] [Flee]")
+            fightflight = Console.ReadLine();
+            
+}
 
 switch (e)
 {
@@ -57,31 +123,26 @@ void pucciMsg()
     Console.WriteLine($"High Priest Pucci has {enemyHP} Health");
     Thread.Sleep(2000);
 
-    Console.WriteLine("What would you like to do? [Attack] [Block] [Heal]");
+    Console.WriteLine("What would you like to do? [Stab] [Thrust] [Block] [Heal]");
     Thread.Sleep(2000);
-
-
-
 }
 
-void pucciAttack()
+void pucciCrit()
 {
-    Thread.Sleep(1000);
-    Console.WriteLine($"High Priest Pucci has  {enemyHP} Health");
-
-
-    Console.WriteLine("High Priest Pucci has contolled his emotions and packed them into a single devastating punch!");
-    Thread.Sleep(2000);
-
     if (enemyCritchance == 1)
     {
+       Console.WriteLine("High Priest Pucci has contolled his emotions and packed them into a single devastating punch!");
+        Thread.Sleep(1000);
         enemydamage = enemydamage * 2;
         playerHP = playerHP - enemydamage;
         Console.WriteLine($"You now have {playerHP} Health Left ");
         Thread.Sleep(2000);
     }
+}
 
-    else if (enemyCritchance != 1)
+void pucciCritless()
+{
+    if (enemyCritchance != 1)
     {
         Console.WriteLine($"High Priest Pucci dealt you {enemydamage} damage ");
         playerHP = playerHP - enemydamage;
@@ -90,7 +151,20 @@ void pucciAttack()
     }
 }
 
-void playerCrit()
+void pucciAttack()
+{
+    Thread.Sleep(1000);
+    Console.WriteLine($"High Priest Pucci has {enemyHP} Health");
+
+
+    
+
+    pucciCrit();
+
+    pucciCritless();
+}
+
+void playerStabCrit()
 {
     Console.ForegroundColor = ConsoleColor.Red;
     Thread.Sleep(1000);
@@ -98,16 +172,38 @@ void playerCrit()
     Thread.Sleep(1000);
     Thread.Sleep(1000);
 
-    playerDamage = playerDamage * 2;
-    Console.WriteLine($"You managed to land your attack in your enemy's weak spot, it did {playerDamage} Damage!");
+    playerStabDamage = playerStabDamage * 2;
+    Console.WriteLine($"You managed to land your stab attack in your enemy's weak spot, it did {playerStabDamage} Damage!");
 
-    enemyHP = enemyHP - playerDamage;
+    enemyHP = enemyHP - playerStabDamage;
     Console.ForegroundColor = ConsoleColor.White;
 }
 
 void blockedPucci()
 {
+    if (playerblockchance == 1 && enemyCritchance != 1)
+    {
+        Console.WriteLine($"High Priest Pucci dealt you {enemydamage} damage ");
+        Console.WriteLine("However, you were able to put your guard up in time, and Pucci hardly dealt any damage to you");
+        playerHP = playerHP - 1;
+        Console.WriteLine($"You now have {playerHP} Health Left ");
+        Thread.Sleep(2000);
 
+    }
+}
+
+void blockedPucciFail()
+{
+    if (playerblockchance == 1 && enemyCritchance == 1)
+    {
+        Console.WriteLine("High Priest Pucci has contolled his emotions and packed them into a single devastating punch!");
+        Thread.Sleep(1000);
+        Console.WriteLine("You attempted to block High Priest Pucci's attack, but he broke through your guard and hit you with his devastating punch!");
+        enemydamage = enemydamage * 2;
+        playerHP = playerHP - enemydamage;
+        Console.WriteLine($"You now have {playerHP} Health Left ");
+        Thread.Sleep(2000);
+    }
 }
 
 void pucciKill()
@@ -115,7 +211,7 @@ void pucciKill()
     if (playerHP <= 0)
     {
         Console.WriteLine("High Priest Pucci has stolen your throne and defeated you");
-    }
+    }    
 }
 void pucciDeath()
 {
@@ -132,11 +228,11 @@ void rndDam()
     enemyCritchance = rnd.Next(0, 10);
 
     playerblockchance = rnd.Next(0, 6);
-    playerDamage = rnd.Next(12, 50);
+    playerStabDamage = rnd.Next(12, 50);
+    playerThrustDamage = rnd.Next(2, 75);
     enemydamage = rnd.Next(9, 35);
 }
 
-enemyChance = rnd.Next(1, 1);
 Console.WriteLine(e);
 if (enemyChance == 1 && e == 1)
 {
@@ -230,37 +326,39 @@ if (enemy1Spawned == true)
         pucciMsg();
         answer = Console.ReadLine();
 
-        if (answer == "Attack" ^ answer == "attack" ^ answer == "1" ^ answer == "a")
+        if (answer == "Stab" ^ answer == "stab" ^ answer == "1" ^ answer == "s")
         {
             rndDam();
 
             if (playerCritchance == 1)
             {
-                playerCrit();
+                playerStabCrit();
             }
 
             else if (playerCritchance != 1)
             {
-                Console.WriteLine($"You attacked Pucci for {playerDamage} damage");
-                enemyHP = enemyHP - playerDamage;
+                Console.WriteLine($"You stabbed High Priest Pucci for {playerStabDamage} damage");
+                enemyHP = enemyHP - playerStabDamage;
             }
 
-            if (enemyHP <= 0)
-            {
-                enemy1Spawned = false;
-                Console.WriteLine(deathMessage1);
-            }
-
-            else if (enemyHP > 0 && playerHP > 0)
+            if (enemyHP > 0 && playerHP > 0)
             {
                 pucciAttack();
             }
 
-            pucciKill();
+                pucciDeath();
+
+                pucciKill();
         }
 
         else if (answer == "Block" ^ answer == "block" ^ answer == "2" ^ answer == "b")
         {
+            
+            rndDam();
+            playerblockchance = 1;
+
+            blockedPucci();
+            blockedPucciFail();
             pucciKill();
         }
     }

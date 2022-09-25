@@ -1,0 +1,15 @@
+C:\Users\alexh\OneDrive\Desktop\Repos\repo2 github desktop\repo2\A Monarch's Flight\obj\Debug\net6.0\A Monarch's Flight.csproj.AssemblyReference.cache
+C:\Users\alexh\OneDrive\Desktop\Repos\repo2 github desktop\repo2\A Monarch's Flight\obj\Debug\net6.0\A Monarch's Flight.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alexh\OneDrive\Desktop\Repos\repo2 github desktop\repo2\A Monarch's Flight\obj\Debug\net6.0\A Monarch's Flight.AssemblyInfoInputs.cache
+C:\Users\alexh\OneDrive\Desktop\Repos\repo2 github desktop\repo2\A Monarch's Flight\obj\Debug\net6.0\A Monarch's Flight.AssemblyInfo.cs
+C:\Users\alexh\OneDrive\Desktop\Repos\repo2 github desktop\repo2\A Monarch's Flight\obj\Debug\net6.0\A Monarch's Flight.csproj.CoreCompileInputs.cache
+C:\Users\alexh\OneDrive\Desktop\Repos\repo2 github desktop\repo2\A Monarch's Flight\bin\Debug\net6.0\A Monarch's Flight.exe
+C:\Users\alexh\OneDrive\Desktop\Repos\repo2 github desktop\repo2\A Monarch's Flight\bin\Debug\net6.0\A Monarch's Flight.deps.json
+C:\Users\alexh\OneDrive\Desktop\Repos\repo2 github desktop\repo2\A Monarch's Flight\bin\Debug\net6.0\A Monarch's Flight.runtimeconfig.json
+C:\Users\alexh\OneDrive\Desktop\Repos\repo2 github desktop\repo2\A Monarch's Flight\bin\Debug\net6.0\A Monarch's Flight.dll
+C:\Users\alexh\OneDrive\Desktop\Repos\repo2 github desktop\repo2\A Monarch's Flight\bin\Debug\net6.0\A Monarch's Flight.pdb
+C:\Users\alexh\OneDrive\Desktop\Repos\repo2 github desktop\repo2\A Monarch's Flight\obj\Debug\net6.0\A Monarch's Flight.dll
+C:\Users\alexh\OneDrive\Desktop\Repos\repo2 github desktop\repo2\A Monarch's Flight\obj\Debug\net6.0\refint\A Monarch's Flight.dll
+C:\Users\alexh\OneDrive\Desktop\Repos\repo2 github desktop\repo2\A Monarch's Flight\obj\Debug\net6.0\A Monarch's Flight.pdb
+C:\Users\alexh\OneDrive\Desktop\Repos\repo2 github desktop\repo2\A Monarch's Flight\obj\Debug\net6.0\A Monarch's Flight.genruntimeconfig.cache
+C:\Users\alexh\OneDrive\Desktop\Repos\repo2 github desktop\repo2\A Monarch's Flight\obj\Debug\net6.0\ref\A Monarch's Flight.dll
